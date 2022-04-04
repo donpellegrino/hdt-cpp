@@ -31,14 +31,6 @@ AC_ARG_ENABLE([optimization],
   [CXXFLAGS="${CXXFLAGS} -g -O2 -std=c++11"]
   [AC_MSG_RESULT(yes)])
 
-AC_MSG_CHECKING(whether to build libcds)
-AC_ARG_ENABLE([libcds],
-  AS_HELP_STRING([--enable-libcds],[Build libcds [default=yes]]),
-  [AC_MSG_RESULT(${enableval})],
-  [enable_cds=yes]
-  [AC_MSG_RESULT(yes)])
-AM_CONDITIONAL([WANTS_LIBCDS], [test x$enable_cds != xno])
-
 # Dependencies
 AC_ARG_WITH([zlib],
   AS_HELP_STRING([--with-zlib], [Use z library [default=yes] ]),
@@ -58,6 +50,16 @@ AS_IF([test x$with_serd != xno],
     [AC_DEFINE([HAVE_SERD],[1],[Serd available])]
     [EXTRAFLAGS="${EXTRAFLAGS} -DHAVE_SERD"]
     [AC_SUBST(EXTRAFLAGS)])
+  ])
+
+AC_ARG_WITH([sdsl-lite],
+  AS_HELP_STRING([--with-sdsl-lite], [Use SDSL-lite library [default=yes]]),
+  [], [with_sdsl_lite=true])
+AS_IF([test x$with_sdsl_lite != xno],
+  [PKG_CHECK_MODULES([SDSL_LITE], [sdsl-lite],
+     [AC_DEFINE([HAVE_SDSL_LITE],[1],[SDSL-Lite availabile])]
+     [EXTRAFLAGS="${EXTRAFLAGS} -DHAVE_SDSL_LITE"]
+     [AC_SUBST(EXTRAFLAGS)])
   ])
 
 AC_ARG_WITH([kyoto],
@@ -94,8 +96,5 @@ AC_CONFIG_FILES([
   libhdt/Makefile
   libhdt/tools/Makefile
   libhdt/tests/Makefile
-  libcds/cds.pc
-  libcds/Makefile
-  libcds/tests/Makefile
 ])
 AC_OUTPUT
