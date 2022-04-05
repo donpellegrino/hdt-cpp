@@ -29,8 +29,6 @@
  *
  */
 
-#if HAVE_CDS
-
 #include <stdexcept>
 #include "LiteralDictionary.hpp"
 #include <HDTVocabulary.hpp>
@@ -719,7 +717,3 @@ void LiteralDictionary::getSuggestions(const char *base, hdt::TripleComponentRol
 }
 
 }
-
-#else
-int LiteralDictionayDummySymbol;
-#endif

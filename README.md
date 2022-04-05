@@ -42,6 +42,9 @@ dependencies installed:
     (e.g., Fedora)
   - `brew install pkg-config` on macOS/OSX
 
+- [sdsl-lite](https://github.com/simongog/sdsl-lite/)
+  Succinct Data Structure Library
+
 - [Serd v0.28+](https://github.com/drobilla/serd) The default parser
   that is used to process RDF input files.  It supports the N-Quads,
   N-Triples, TriG, and Turtle serialization formats.

@@ -34,15 +34,9 @@
 #ifndef _CSDFMINDEX_H
 #define _CSDFMINDEX_H
 
-#if HAVE_CDS
-
 #include "CSD.h"
 
 #include <Iterator.hpp>
-#include <SequenceBuilder.h>
-#include <Sequence.h>
-#include <BitSequenceBuilder.h>
-#include <BitSequence.h>
 #include "fmindex/SSA.h"
 
 #include <set>
@@ -128,7 +122,7 @@ namespace csd{
 		
 		protected:
 			SSA *fm_index;
-			BitSequence *separators;
+			bit_vector *separators;
 			bool use_sampling;
 			uint32_t maxlength;
 
@@ -141,5 +135,4 @@ namespace csd{
 
 };
 
-#endif
 #endif  /* _URICDFMINDEX_H */

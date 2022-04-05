@@ -34,28 +34,23 @@
 #ifndef SSA_WORDS_H
 #define SSA_WORDS_H
 
-#include <SequenceBuilder.h>
-#include <Sequence.h>
-#include <BitSequenceBuilder.h>
-#include <BitSequence.h>
-
-#include <Mapper.h>
 #include <algorithm>
+#include <sdsl/vectors.hpp>
 
 #include "SuffixArray.h"
 
 using namespace std;
-using namespace cds_static;
+using namespace sdsl;
 
 namespace csd{
 	class SSA{
 		public:
-			SSA(uchar * seq, uint n, bool free_text=false, bool use_sampling=false);
+			SSA(unsigned char * seq, uint n, bool free_text=false, bool use_sampling=false);
 			SSA();
 			~SSA();
 
-			bool set_static_sequence_builder(SequenceBuilder * ssb);
-			bool set_static_bitsequence_builder(BitSequenceBuilder * sbb);
+	                bool set_static_sequence_builder(int_vector<0> * ssb);
+                        bool set_static_bitsequence_builder(bit_vector * sbb);
 			bool set_samplesuff(uint sample);
 
 			bool build_index();
@@ -65,19 +60,19 @@ namespace csd{
 			uint length();
 
 			uint LF(uint i);
-			uint locate_id(uchar * pattern, uint m);
-			uint locate(uchar * pattern, uint m, uint32_t **occs);
-            uint locate(uchar * pattern, uint m, uint offset, uint limit, uint32_t **occs, uint* num_occ);
+			uint locate_id(unsigned char * pattern, uint m);
+			uint locate(unsigned char * pattern, uint m, uint32_t **occs);
+            uint locate(unsigned char * pattern, uint m, uint offset, uint limit, uint32_t **occs, uint* num_occ);
 
-			uchar * extract_id(uint id, uint max_len);
+			unsigned char * extract_id(uint id, uint max_len);
             static SSA * load(istream &fp);
             void save(ostream & fp);
 
 		protected:
 			uint n;
-			Sequence * bwt;
+                        int_vector<0> * bwt;
 
-			BitSequence * sampled;
+			bit_vector * sampled;
 			uint samplesuff;
 			uint * suff_sample;  
 			
@@ -89,11 +84,11 @@ namespace csd{
 			bool *alphabet;	
 
 			/*use only for construction*/
-			uchar * _seq;
+			unsigned char * _seq;
 			uint * _bwt;   
 			unsigned long * _sa;   
-			SequenceBuilder * _ssb;
-			BitSequenceBuilder * _sbb;
+                        int_vector<0> * _ssb;
+			bit_vector * _sbb;
 			/*******************************/
 
 			void build_bwt();

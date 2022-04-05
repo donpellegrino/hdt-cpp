@@ -39,7 +39,7 @@
 
 namespace csd{
 
-	SSA::SSA(uchar *text, uint n, bool free_text, bool use_sampling) {
+	SSA::SSA(unsigned char *text, uint n, bool free_text, bool use_sampling) {
 		assert(n>0);
 
 		// Initial values and default constructors
@@ -288,7 +288,7 @@ namespace csd{
 			assert(cmp((uint)_sa[i],(uint)_sa[i+1])<=0);
 	}
 
-	uint SSA::locate_id(uchar * pattern, uint m) {
+	uint SSA::locate_id(unsigned char * pattern, uint m) {
 		unsigned long i=m-1;
 		uint c = pattern[i];
 		uint sp = occ[c];
@@ -308,12 +308,12 @@ namespace csd{
 			return 0;
 	}
 
-	uint SSA::locate(uchar * pattern, uint m, uint32_t **occs){
+	uint SSA::locate(unsigned char * pattern, uint m, uint32_t **occs){
         uint dummy = 0; // return value is equal to array size in this call
         return this->locate(pattern, m, 0, 0, occs, &dummy);
     }
     
-	uint SSA::locate(uchar * pattern, uint m, uint offset, uint limit, uint32_t **occs, uint* num_occ){
+	uint SSA::locate(unsigned char * pattern, uint m, uint offset, uint limit, uint32_t **occs, uint* num_occ){
 		*occs=NULL;
 		*num_occ = 0;
 		if(!use_sampling)
@@ -364,8 +364,8 @@ namespace csd{
 		return rank_tmp -1 + occ[c];
 	}
 
-	uchar * SSA::extract_id(uint id, uint max_len){	
-		uchar *res = new uchar[max_len+2];
+	unsigned char * SSA::extract_id(uint id, uint max_len){	
+		unsigned char *res = new unsigned char[max_len+2];
 		uint i = id;
 		uint pos = max_len+1;
 		res[pos] = '\0';
@@ -376,7 +376,7 @@ namespace csd{
 		//rank_tmp = bwt->rank(c,id);
 		
 		while(c!= 1){
-			res[pos] = (uchar)c;
+			res[pos] = (unsigned char)c;
 			pos --;
 			cont++;
 			i = rank_tmp -1 + occ[c];
